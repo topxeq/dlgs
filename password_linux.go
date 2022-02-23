@@ -9,7 +9,7 @@ import (
 )
 
 // Password displays a dialog, returning the entered value and a bool for success.
-func Password(title, text string) (string, bool, error) {
+func Password(title, text string, optsA ...interface{}) (string, bool, error) {
 	cmd, err := cmdPath()
 	if err != nil {
 		return "", false, err

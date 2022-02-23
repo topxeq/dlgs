@@ -9,7 +9,7 @@ import (
 )
 
 // Password displays a dialog, returning the entered value and a bool for success.
-func Password(title, text string) (string, bool, error) {
+func Password(title, text string, optsA ...interface{}) (string, bool, error) {
 	o, err := osaExecute(`set T to text returned of (display dialog ` + osaEscapeString(text) + ` with title ` + osaEscapeString(title) + ` default answer "" with hidden answer)`)
 	if err != nil {
 		if exitError, ok := err.(*exec.ExitError); ok {
