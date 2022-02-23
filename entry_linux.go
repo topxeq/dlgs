@@ -9,7 +9,7 @@ import (
 )
 
 // Entry displays input dialog, returning the entered value and a bool for success.
-func Entry(title, text, defaultText string) (string, bool, error) {
+func Entry(title, text, defaultText string, optsA ...interface{}) (string, bool, error) {
 	cmd, err := cmdPath()
 	if err != nil {
 		return "", false, err

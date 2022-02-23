@@ -7,7 +7,7 @@ import (
 )
 
 // Entry displays input dialog, returning the entered value and a bool for success.
-func Entry(title, text, defaultText string) (out string, ret bool, err error) {
+func Entry(title, text, defaultText string, optsA ...interface{}) (out string, ret bool, err error) {
 	defer func() {
 		e := recover()
 
