@@ -3,6 +3,6 @@
 package dlgs
 
 // Entry displays input dialog, returning the entered value and a bool for success.
-func Entry(title, text, defaultText string) (string, bool, error) {
-	return editBox(title, text, defaultText, "ClassEntry", false)
+func Entry(title, text, defaultText string, optsA ...string) (string, bool, error) {
+	return editBox(title, text, defaultText, "ClassEntry", false, optsA...)
 }

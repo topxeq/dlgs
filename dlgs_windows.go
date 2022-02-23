@@ -528,7 +528,7 @@ func stringFromUtf16Ptr(p *uint16) string {
 }
 
 // editBox displays textedit/inputbox dialog.
-func editBox(title, text, defaultText, className string, password bool) (string, bool, error) {
+func editBox(title, text, defaultText, className string, password bool, optsA ...string) (string, bool, error) {
 	var out string
 	notCancledOrClosed := true
 
@@ -582,8 +582,18 @@ func editBox(title, text, defaultText, className string, password bool) (string,
 	}
 	hwndEdit, _ = createWindow(wsExClientEdge, "EDIT", defaultText, uint64(flags), 10, 30, 200, 24, hwnd, 0, instance)
 
-	hwndOK, _ := createWindow(wsExClientEdge, "BUTTON", "OK", wsChild|wsVisible|bsPushButton|wsGroup|wsTabStop, 10, 65, 90, 24, hwnd, 100, instance)
-	hwndCancel, _ := createWindow(wsExClientEdge, "BUTTON", "Cancel", wsChild|wsVisible|bsPushButton|wsGroup|wsTabStop, 120, 65, 90, 24, hwnd, 110, instance)
+	okTitleT := "OK"
+	if len(optsA) > 0 {
+		okTitleT = optsA[0]
+	}
+
+	cancelTitleT := "Cancel"
+	if len(optsA) > 1 {
+		cancelTitleT = optsA[1]
+	}
+
+	hwndOK, _ := createWindow(wsExClientEdge, "BUTTON", okTitleT, wsChild|wsVisible|bsPushButton|wsGroup|wsTabStop, 10, 65, 90, 24, hwnd, 100, instance)
+	hwndCancel, _ := createWindow(wsExClientEdge, "BUTTON", cancelTitleT, wsChild|wsVisible|bsPushButton|wsGroup|wsTabStop, 120, 65, 90, 24, hwnd, 110, instance)
 
 	setWindowLong(hwnd, gwlStyle, getWindowLong(hwnd, gwlStyle)^wsMinimizeBox)
 	setWindowLong(hwnd, gwlStyle, getWindowLong(hwnd, gwlStyle)^wsMaximizeBox)
