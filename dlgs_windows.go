@@ -3,6 +3,7 @@
 package dlgs
 
 import (
+	"fmt"
 	"strings"
 	"syscall"
 	"unicode/utf16"
@@ -528,7 +529,7 @@ func stringFromUtf16Ptr(p *uint16) string {
 }
 
 // editBox displays textedit/inputbox dialog.
-func editBox(title, text, defaultText, className string, password bool, optsA ...string) (string, bool, error) {
+func editBox(title, text, defaultText, className string, password bool, optsA ...interface{}) (string, bool, error) {
 	var out string
 	notCancledOrClosed := true
 
@@ -584,12 +585,12 @@ func editBox(title, text, defaultText, className string, password bool, optsA ..
 
 	okTitleT := "OK"
 	if len(optsA) > 0 {
-		okTitleT = optsA[0]
+		okTitleT = fmt.Sprintf("%v", optsA[0])
 	}
 
 	cancelTitleT := "Cancel"
 	if len(optsA) > 1 {
-		cancelTitleT = optsA[1]
+		cancelTitleT = fmt.Sprintf("%v", optsA[1])
 	}
 
 	hwndOK, _ := createWindow(wsExClientEdge, "BUTTON", okTitleT, wsChild|wsVisible|bsPushButton|wsGroup|wsTabStop, 10, 65, 90, 24, hwnd, 100, instance)
